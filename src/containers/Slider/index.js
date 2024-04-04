@@ -19,9 +19,10 @@ const Slider = () => {
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
+        <div key={event.id}>
+          {" "}
+          {/* utiliser la propriété `id` comme clé unique */}
           <div
-            key={event.title}
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
@@ -37,9 +38,9 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc.map((evt, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={`${evt.title}-${radioIdx}`} // utiliser une combinaison de la propriété `title` et de l'index comme clé unique
                   type="radio"
                   name="radio-button"
                   checked={idx === radioIdx}
@@ -47,7 +48,7 @@ const Slider = () => {
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
