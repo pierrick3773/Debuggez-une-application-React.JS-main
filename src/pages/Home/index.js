@@ -62,7 +62,7 @@ const Page = () => {
         </section>
         <section className="EventsContainer">
           <h2 id="nos-realisations" className="Title">
-            {/* Ajout d'un ID pour nav*/}
+            {/* Ajout d'un ID pour nav */}
             Nos réalisations
           </h2>
           <EventList />
