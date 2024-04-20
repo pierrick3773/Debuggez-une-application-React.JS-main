@@ -1,3 +1,5 @@
+// un tableau js commence par 0
+
 export const MONTHS = {
   0: "janvier",
   1: "février",

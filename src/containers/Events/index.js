@@ -13,6 +13,8 @@ const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Filtrer les événements en fonction du type sélectionné et de la page actuelle
   const filteredEvents = (
     (!type
       ? data?.events
@@ -26,12 +28,18 @@ const EventList = () => {
     }
     return false;
   });
+
+  // Définir la fonction pour changer le type sélectionné et réinitialiser la page actuelle
   const changeType = (evtType) => {
     setCurrentPage(1);
     setType(evtType);
   };
+
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
+
+  // Créer une liste de types uniques à partir des événements
   const typeList = new Set(data?.events.map((event) => event.type));
+
   return (
     <>
       {error && <div>An error occured</div>}
@@ -41,7 +49,7 @@ const EventList = () => {
         <>
           <h3 className="SelectTitle">Catégories</h3>
           <Select
-            selection={Array.from(typeList)}
+            selection={Array.from(typeList)} // Utiliser Array.from pour convertir typeList en tableau
             onChange={(value) => (value ? changeType(value) : changeType(null))}
           />
           <div id="events" className="ListContainer">

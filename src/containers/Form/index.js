@@ -4,6 +4,7 @@ import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
+// Définir la promesse mockContactApi pour refléter le temps d'attente réel de 950 ms
 const mockContactApi = () =>
   new Promise((resolve) => {
     setTimeout(resolve, 950);
@@ -11,22 +12,24 @@ const mockContactApi = () =>
 
 const Form = ({ onSuccess, onError }) => {
   const [sending, setSending] = useState(false);
+
+  // Définir la fonction sendContact pour appeler la fonction onSuccess lorsque la promesse mockContactApi est résolue avec succès
   const sendContact = useCallback(
     async (evt) => {
       evt.preventDefault();
       setSending(true);
-      // We try to call mockContactApi
       try {
         await mockContactApi();
         setSending(false);
-        onSuccess();
+        onSuccess(); // Appeler la fonction onSuccess
       } catch (err) {
         setSending(false);
         onError(err);
       }
     },
-    [onSuccess, onError]
+    [onSuccess, onError] // Ajouter la fonction onSuccess en tant que dépendance de useCallback
   );
+
   return (
     <form onSubmit={sendContact}>
       <div className="row">
